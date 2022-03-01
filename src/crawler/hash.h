@@ -1,0 +1,2 @@
+unsigned long hash(char*);
+
