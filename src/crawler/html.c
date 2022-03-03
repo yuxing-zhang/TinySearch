@@ -22,7 +22,7 @@ int get_next_url(char *html, const char *url, char *next, int pos) {
         remove_white_space(html);
     for (; html[pos]; pos++) {
         if (html[pos] == '<' &&
-            (html[pos+1] == 'A' || html[pos+1] == 'a')) {
+            (html[pos+1] == 'A' || html[pos+1] == 'a') && html[pos+2] == 'h') {
             char *p1 = strchr(html+pos+1, '='), *p2;
             // several invalid cases
             if (!p1 || *(p1-1) == 'e' || p1 - html - pos > 10)
@@ -135,7 +135,7 @@ void remove_white_space(char *html) {
 int main(int argc, char *argv[]) {
     char *s = "https://web.cs.dartmouth.edu";
     char next[1000];
-    FILE *f = fopen("../../data/1.html", "r");
+    FILE *f = fopen("../../data/0.html", "r");
     char html[80000];
     memset(html, 0, sizeof(html));
     char line[1000];
