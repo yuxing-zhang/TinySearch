@@ -8,7 +8,7 @@
 #include "dict.h"
 
 // Helper function to create a node
-Node *create_node(const char *key, void *value, Node *next) {
+Node *create_node(char *key, void *value, Node *next) {
     Node *node = malloc(sizeof(Node));
     node->key = key;
     node->value = value;
@@ -27,7 +27,7 @@ int has_key(Node *dict[], const char *key) {
 }
 
 // Add a key-value pair. Always use after uniqueness check
-void add_key(Node *dict[], const char *key, void *value) {
+void add_key(Node *dict[], char *key, void *value) {
     int k = hash(key) % MAX_SLOT;
     Node *node = create_node(key, value, dict[k]);
     dict[k] = node;
