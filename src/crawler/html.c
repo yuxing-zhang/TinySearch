@@ -16,7 +16,7 @@ Args:
 Return:
     position of the next url
 */
-int get_next_url(char *html, char *url, char *next, int pos) {
+int get_next_url(char *html, const char *url, char *next, int pos) {
     // clean up
     if (!pos)
         remove_white_space(html);
@@ -37,12 +37,13 @@ int get_next_url(char *html, char *url, char *next, int pos) {
             // found a full URL
             if (!strncmp(p1, "http", 4) || !strncmp(p1, "HTTP", 4)) {
                 strncpy(next, p1, p2-p1);
+                next[p2-p1] = 0;
                 return p2 - html + 1;
             }
             int i;
             // found an absolute path
             if (*p1 == '/') {
-                for (i = 7; i < strlen(url); i++)
+                for (i = 8; i < strlen(url); i++)
                     if (url[i] == '/')
                         break;
                 strncpy(next, url, i);
@@ -130,15 +131,11 @@ void remove_white_space(char *html) {
     free(buffer);
 }
 
-/* module test
+/* Test module
 int main(int argc, char *argv[]) {
-    char *s = malloc(strlen(argv[1]) + 1);
-    int i;
-    for (i = 0; i < strlen(argv[1]); i++)
-        s[i] = argv[1][i];
-    s[i] = 0;
+    char *s = "https://web.cs.dartmouth.edu";
     char next[1000];
-    FILE *f = fopen("dcs.html", "r");
+    FILE *f = fopen("../../data/1.html", "r");
     char html[80000];
     memset(html, 0, sizeof(html));
     char line[1000];
