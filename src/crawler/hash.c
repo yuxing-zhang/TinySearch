@@ -5,7 +5,7 @@
 #include <string.h>
 
 //! this one is called djb2
-unsigned long hash(char* str) {
+unsigned long hash(const char* str) {
   unsigned long hash = 5381;
   int c;
   while ((c = *str++) != 0)

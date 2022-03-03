@@ -1,2 +1,2 @@
-unsigned long hash(char*);
+unsigned long hash(const char*);
 
