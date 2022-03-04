@@ -56,13 +56,14 @@ int main(int argc, char *argv[]) {
         exit(1);
     }
     char seed[MAX_URL_LENGTH] = "https://web.cs.dartmouth.edu/";
-    if (argc == 2)
+    if (argc == 2) {
         if (strcmp(argv[1], "-h") && strcmp(argv[1], "--help"))
             strcpy(seed, argv[1]);
         else {
             puts("usage: ./crawler [URL]");
             exit(0);
         }
+    }
     Node *dict[MAX_SLOT];
     for (int i = 0; i < MAX_SLOT; i++)
         dict[i] = NULL;
