@@ -1,5 +1,5 @@
 // Maximal length of webpages
-#define MAX_PAGE_LENGTH 80000
+#define MAX_PAGE_LENGTH 1000000
 // Maximal length of a line in pages
 #define MAX_LINE_LENGTH 1000
 // Maximal url length
