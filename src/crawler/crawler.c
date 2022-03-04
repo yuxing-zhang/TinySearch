@@ -8,7 +8,7 @@
 
 // Recursively visit a html page. Running DFS with a maximum depth.
 void visit(Node *dict[], const char *url, int dep, int *id) {
-    printf("visiting %d %d\nurl = %s\n", dep, *id, url);
+    printf("visiting page %d at depth %d\nurl = %s\n", *id, dep, url);
     char *key = malloc(sizeof(char) * MAX_URL_LENGTH);
     strcpy(key, url);
     add_key(dict, key, NULL);
@@ -18,7 +18,7 @@ void visit(Node *dict[], const char *url, int dep, int *id) {
     char pth[20];
     sprintf(pth, "../../data/%d.html", *id);
     // CAVEAT: put url into ''
-    sprintf(cmd, "echo '%s' > %s; curl '%s' >> %s", url, pth, url, pth);
+    sprintf(cmd, "echo '%s' > %s; curl -sS '%s' >> %s", url, pth, url, pth);
     if (system(cmd)) {
         --*id;
         return;
@@ -49,9 +49,20 @@ char *load_html(const char *url, const char *pth) {
     return html; 
 }
 
-int main() {
+int main(int argc, char *argv[]) {
     system("rm -r ../../data; mkdir ../../data");
-    char *seed = "https://web.cs.dartmouth.edu/";
+    if (argc > 2) {
+        puts("usage: ./crawler [URL]");
+        exit(1);
+    }
+    char seed[MAX_URL_LENGTH] = "https://web.cs.dartmouth.edu/";
+    if (argc == 2)
+        if (strcmp(argv[1], "-h") && strcmp(argv[1], "--help"))
+            strcpy(seed, argv[1]);
+        else {
+            puts("usage: ./crawler [URL]");
+            exit(0);
+        }
     Node *dict[MAX_SLOT];
     for (int i = 0; i < MAX_SLOT; i++)
         dict[i] = NULL;
