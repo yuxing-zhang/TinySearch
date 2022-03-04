@@ -8,7 +8,7 @@
 
 // Recursively visit a html page. Running DFS with a maximum depth.
 void visit(Node *dict[], const char *url, int dep, int *id) {
-    printf("visiting %d %d\n", dep, *id);
+    printf("visiting %d %d\nurl = %s\n", dep, *id, url);
     char *key = malloc(sizeof(char) * MAX_URL_LENGTH);
     strcpy(key, url);
     add_key(dict, key, NULL);
@@ -17,7 +17,8 @@ void visit(Node *dict[], const char *url, int dep, int *id) {
     memset(cmd, 0, sizeof cmd);
     char pth[20];
     sprintf(pth, "../../data/%d.html", *id);
-    sprintf(cmd, "curl %s -o %s", url, pth);
+    // CAVEAT: put url into ''
+    sprintf(cmd, "echo '%s' > %s; curl '%s' >> %s", url, pth, url, pth);
     if (system(cmd)) {
         --*id;
         return;
@@ -34,7 +35,6 @@ void visit(Node *dict[], const char *url, int dep, int *id) {
             visit(dict, next, dep+1, id);
         }
     free(html);
-    return;
 }
 
 char *load_html(const char *url, const char *pth) {
