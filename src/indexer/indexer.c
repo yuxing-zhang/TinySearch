@@ -31,7 +31,7 @@ void count(Node *dict[], char *word, int id) {
 // Return 0 upon success
 int count_page(Node *dict[], int id) {
     char pth[100];
-    sprintf(pth, "../../data/html/%d.html", id);
+    sprintf(pth, "../data/html/%d.html", id);
     char *html;
     if (!(html = load_html(pth)))
         return -1;
@@ -51,7 +51,7 @@ int count_page(Node *dict[], int id) {
 void save_dict(Node *dict[]) {
     int count;
     char s[MAX_INDEX_LENGTH];
-    FILE *f = fopen("../../data/index.dat", "w");
+    FILE *f = fopen("../data/index.dat", "w");
     Node **counter;
     for (int i = 0; i < MAX_SLOT; i++)
         if (dict[i])
@@ -76,7 +76,7 @@ void save_dict(Node *dict[]) {
 
 Node **load_dict() {
     Node **dict = create_dict();
-    FILE *f = fopen("../../data/index.dat", "r");
+    FILE *f = fopen("../data/index.dat", "r");
     char buf[MAX_INDEX_LENGTH], *s, *t, *w, *id;
     memset(buf, 0, sizeof buf);
     int page_count, *count;
