@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "dict.h"
-#include "html.h"
+#include "../utils/dict.h"
+#include "../utils/html.h"
 #include "indexer.h"
 
 // Count a single occurrence of a word in a webpage

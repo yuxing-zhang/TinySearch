@@ -1,13 +1,10 @@
 CC = clang
-OBJ = crawler.o html.o dict.o hash.o
+OBJ = crawler.o ../utils/html.o ../utils/dict.o ../utils/hash.o
 
 crawler : $(OBJ)
 	$(CC) -o crawler $(OBJ)
 
-crawler.o : crawler.h html.h dict.h
-html.o : html.h
-dict.o : dict.h hash.h
-hash.o :
+crawler.o : crawler.h ../utils/html.h ../utils/dict.h
 
 clean :
-	rm $(OBJ)
+	rm crawler.o
