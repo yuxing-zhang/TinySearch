@@ -1,6 +1,6 @@
 ## The tiny search engine project
 * [x] Crawler
-* [ ] Indexer
+* [x] Indexer
 * [ ] Query engine
 
 ### References
