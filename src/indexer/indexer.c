@@ -76,7 +76,7 @@ void save_dict(Node *dict[]) {
 
 Node **load_dict() {
     Node **dict = create_dict();
-    FILE *f = fopen("../../data/index.dat1", "r");
+    FILE *f = fopen("../../data/index.dat", "r");
     char buf[MAX_INDEX_LENGTH], *s, *t, *w, *id;
     memset(buf, 0, sizeof buf);
     int page_count, *count;
@@ -120,16 +120,11 @@ int main() {
     for (int i = 0;;i++)
         if (count_page(dict, i) == -1)
             break;
-//    save_dict(dict);
-    free_dict(dict, 2);
-    dict = load_dict();
-/*    Node **t = get_value(dict1, "contract");
-    for (int i = 0; i < MAX_SLOT; i++)
-        if (t[i])
-            for (Node *j = t[i]; j; j = j->next)
-                printf("%s %d\n", j->key, *(int *)j->value);*/
     save_dict(dict);
     free_dict(dict, 2);
+//    dict = load_dict();
+//    save_dict(dict);
+//    free_dict(dict, 2);
 }
 
 
