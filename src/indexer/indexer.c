@@ -30,7 +30,7 @@ void count(Node *dict[], char *word, int id) {
 // Return -1 when file cannot be opened
 // Return 0 upon success
 int count_page(Node *dict[], int id) {
-    char pth[100];
+    char pth[MAX_PATH_LENGTH];
     sprintf(pth, "../data/html/%d.html", id);
     char *html;
     if (!(html = load_html(pth)))
