@@ -154,8 +154,10 @@ int main(int argc, char *argv[]) {
     // Search loop
     while (1) {
         printf("Search >>> ");
-        if(!fgets(buf, sizeof buf, stdin))
-            break();
+        if(!fgets(buf, sizeof buf, stdin)) {
+            putchar('\n');
+            break;
+        }
         // In case of no input
         if (buf[0] == '\n')
             continue;
