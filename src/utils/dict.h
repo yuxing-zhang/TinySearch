@@ -19,6 +19,8 @@ void add_key(Node *[], char *, void *);
 
 void update_key(Node *[], const char *, void *);
 
+void del_key(Node *[], const char *);
+
 void free_node(Node *, int);
 
 void free_list(Node *, int);

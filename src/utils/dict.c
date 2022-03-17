@@ -55,6 +55,21 @@ void update_key(Node *dict[], const char *key, void *value) {
     p->value = value;
 }
 
+// Delete a key-value pair
+void del_key(Node *dict[], const char *key) {
+    int k = hash(key) % MAX_SLOT;
+    Node *p = dict[k];
+    if (!strcmp(p->key, key)) {
+        dict[k] = p->next;
+        free_node(p, 0);
+        return;
+    }
+    Node *q;
+    for (q = p->next; strcmp(q->key, key); p = p->next, q = q->next) {}
+    p->next = q->next;
+    free_node(q, 0);
+}
+
 // The below are cleaning routines, wherein parameter l indicates
 // the current layer in case the dictionary is nested.
 
@@ -65,16 +80,15 @@ void free_node(Node *p, int l) {
         free(p->value);
     else
         free_dict(p->value, l);
+    p->next = NULL;
     free(p);
 }
 
 // Clean a linked list
 void free_list(Node *p, int l) {
     if (!p) return;
-    if (p->next) {
+    if (p->next)
         free_list(p->next, l);
-        p->next = NULL;
-    }
     free_node(p, l);
 }
 
