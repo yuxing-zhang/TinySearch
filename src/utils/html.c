@@ -34,6 +34,8 @@ int get_next_url(char *html, const char *url, char *next, int pos) {
                 continue;
             if (!(p2 = strpbrk(p1, "\'\">")))
                 continue;
+            if (!strncmp(p2-4, ".pdf", 4))
+                continue;
             // found a full URL
             if (!strncmp(p1, "http", 4) || !strncmp(p1, "HTTP", 4)) {
                 strncpy(next, p1, p2-p1);
@@ -66,7 +68,6 @@ int get_next_url(char *html, const char *url, char *next, int pos) {
     return -1;
 }
 
-            
 
 // Convert upper case string to lower case wherever possible
 void lower(char *s) {
@@ -126,8 +127,9 @@ void remove_white_space(char *html) {
 // Remove all tags and java scripts
 void textualize(char *html) {
     // p is the new end and q is the scanning pointer
-    char *p, *q;
+    char *p, *q, *t;
     for (p = html, q = strchr(html, '\n') + 1; *q; q++) {
+        if (*q == '\r') putchar('f');
         if (*q == '<') {
             if (!strncmp(q, "<script", 7))
                 q = strstr(q, "</script>");
@@ -137,13 +139,16 @@ void textualize(char *html) {
             if (*p != ' ')
                 *p++ = ' ';
         } else if (*q == '&') {
-            q = strchr(q, ';');
-        } else if (*q >= 'a' && *q <= 'z') {
+            // if no near ';' then treat '&' as normal
+            if((t = memchr(q, ';', 10)))
+                q = t;
+        }
+        else if (*q >= 'a' && *q <= 'z')
             *p++ = *q;
         // Change upper case letters into lower cases
-        } else if (*q >= 'A' && *q <= 'Z') {
+        else if (*q >= 'A' && *q <= 'Z')
             *p++ = *q + 32;
-        } else
+        else
             *p++ = ' ';
     }
     *p = 0;
@@ -183,7 +188,7 @@ int main(int argc, char *argv[]) {
 */
 /* Test module 2
 int main() {
-    FILE *f = fopen("data/html/0.html", "r");
+    FILE *f = fopen("../../data/html/115.html", "r");
     char buf[MAX_LINE_LENGTH];
     char html[MAX_PAGE_LENGTH];
     memset(html, 0, sizeof html);
