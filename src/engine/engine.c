@@ -80,7 +80,7 @@ void search(Node **index, int nf, char **term, int n) {
     char url[MAX_URL_LENGTH], pth[MAX_PATH_LENGTH];
     FILE *f;
     for (int i = 0; i < nr; i++) {
-        sprintf(pth, "../data/html/%s.html", result[i].key);
+        sprintf(pth, "data/html/%s.html", result[i].key);
         f = fopen(pth, "r");
         fgets(url, sizeof url, f);
         printf("%s", url);
@@ -154,7 +154,8 @@ int main(int argc, char *argv[]) {
     // Search loop
     while (1) {
         printf("Search >>> ");
-        fgets(buf, sizeof buf, stdin);
+        if(!fgets(buf, sizeof buf, stdin))
+            break();
         // In case of no input
         if (buf[0] == '\n')
             continue;
