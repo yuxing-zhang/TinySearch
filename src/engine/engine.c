@@ -100,7 +100,7 @@ int cmp(const void *m, const void *n) {
 
 Node **load_dict() {
     Node **dict = create_dict();
-    FILE *f = fopen("../data/index.dat", "r");
+    FILE *f = fopen("data/index.dat", "r");
     char buf[MAX_INDEX_LENGTH], *s, *t, *w, *id;
     memset(buf, 0, sizeof buf);
     int page_count, *count;
@@ -142,7 +142,7 @@ int main(int argc, char *argv[]) {
     char *ter[MAX_TERMS], *s, *t;
     FILE *f;
     for (j = 0;;j++) {
-        sprintf(pth, "../data/html/%d.html", j);
+        sprintf(pth, "data/html/%d.html", j);
         if(!(f = fopen(pth, "r")))
             break;
     }

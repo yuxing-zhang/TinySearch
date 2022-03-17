@@ -167,7 +167,7 @@ char *load_html(const char *pth) {
 int main(int argc, char *argv[]) {
     char *s = "https://web.cs.dartmouth.edu";
     char next[1000];
-    FILE *f = fopen("../../data/0.html", "r");
+    FILE *f = fopen("data/html/0.html", "r");
     char html[80000];
     memset(html, 0, sizeof(html));
     char line[1000];
@@ -183,14 +183,12 @@ int main(int argc, char *argv[]) {
 */
 /* Test module 2
 int main() {
-    FILE *f = fopen("../../data/0.html", "r");
+    FILE *f = fopen("data/html/0.html", "r");
     char buf[MAX_LINE_LENGTH];
     char html[MAX_PAGE_LENGTH];
     memset(html, 0, sizeof html);
-    while (!feof(f)) {
-        fgets(buf, sizeof buf, f);
+    while (fgets(buf, sizeof buf, f))
         strcat(html, buf);
-    }
     textualize(html);
     puts(html);
 }

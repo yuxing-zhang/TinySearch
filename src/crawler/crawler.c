@@ -16,7 +16,7 @@ void visit(Node *dict[], const char *url, int dep, int *id) {
     char cmd[1000];
     memset(cmd, 0, sizeof cmd);
     char pth[100];
-    sprintf(pth, "../data/html/%d.html", *id);
+    sprintf(pth, "data/html/%d.html", *id);
     // CAVEAT: put url into ''
     sprintf(cmd, "echo '%s' > %s; curl -sS '%s' >> %s", url, pth, url, pth);
     if (system(cmd)) {
@@ -39,10 +39,10 @@ void visit(Node *dict[], const char *url, int dep, int *id) {
 
 int main(int argc, char *argv[]) {
     DIR *d;
-    if ((d = opendir("../data/html")))
-        system("rm -r ../data/html; mkdir ../data/html");
+    if ((d = opendir("data/html")))
+        system("rm -r data/html; mkdir data/html");
     else
-        system("mkdir ../data/html");
+        system("mkdir -p data/html");
     closedir(d);
     if (argc > 2) {
         puts("usage: ./crawler [(-h | --help) | URL]");
