@@ -39,11 +39,12 @@ void visit(Node *dict[], const char *url, int dep, int *id) {
 
 int main(int argc, char *argv[]) {
     DIR *d;
-    if ((d = opendir("data/html")))
+    if ((d = opendir("data/html"))) {
         system("rm -r data/html; mkdir data/html");
+        closedir(d);
+    }
     else
         system("mkdir -p data/html");
-    closedir(d);
     if (argc > 2) {
         puts("usage: ./crawler [(-h | --help) | URL]");
         exit(1);
