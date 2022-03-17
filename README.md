@@ -1,7 +1,7 @@
 ## The tiny search engine project
 * [x] Crawler
 * [x] Indexer
-* [ ] Query engine
+* [x] Query engine
 
 ### TO BUILD
 Type "make". This will recursively build all components under `bin` folder.
