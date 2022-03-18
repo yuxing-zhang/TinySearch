@@ -2,9 +2,9 @@
 #include <stdio.h>
 #include <string.h>
 #include <time.h>
-#include "../utils/dict.h"
-#include "../utils/html.h"
-#include "../indexer/indexer.h"
+#include "dict.h"
+#include "html.h"
+#include "indexer.h"
 #include "engine.h"
 
 /* Calculate the intersection of two counters. Common elements are added up.

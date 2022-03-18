@@ -1,12 +1,14 @@
 CC = clang
-OBJ = crawler.o ../utils/html.o ../utils/dict.o ../utils/hash.o
-bin = ../../bin/crawler
+CFLAGS = -Wall -pedantic -std=c99 -I $(INC)
+INC = ../../include/
+LIB = ../../lib/libtseutils.a
+BIN = ../../bin/crawler
 
-$(bin) : $(OBJ)
+$(BIN) : crawler.o $(LIB)
 	mkdir -p ../../bin
-	$(CC) -o $(bin) $(OBJ)
+	$(CC) -o $(BIN) $(CFLAGS) $^
 
-crawler.o : crawler.h ../utils/html.h ../utils/dict.h
+crawler.o : $(INC)crawler.h $(INC)html.h $(INC)dict.h
 
 clean :
-	rm crawler.o
+	rm crawler.o $(BIN)

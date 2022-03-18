@@ -1,12 +1,14 @@
-cc = clang
-obj = engine.o ../utils/dict.o ../utils/html.o ../utils/hash.o
-bin = ../../bin/engine
+CC = clang
+CFLAGS = -Wall -pedantic -std=c99 -I $(INC)
+INC = ../../include/
+BIN = ../../bin/engine
+LIB = ../../lib/libtseutils.a
 
-$(bin) : $(obj)
+$(BIN) : engine.o $(LIB)
 	mkdir -p ../../bin
-	$(cc) -o $(bin) $(obj)
+	$(CC) -o $(BIN) $(CFLAGS) $^
 
-engine.o : engine.h ../utils/dict.h ../utils/html.h ../indexer/indexer.h
+engine.o : $(INC)engine.h $(INC)dict.h $(INC)html.h $(INC)indexer.h
 
 clean :
-	rm engine.o
+	rm engine.o $(BIN)

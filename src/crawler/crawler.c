@@ -2,8 +2,8 @@
 #include <stdio.h>
 #include <string.h>
 #include <dirent.h>
-#include "../utils/html.h"
-#include "../utils/dict.h"
+#include "html.h"
+#include "dict.h"
 #include "crawler.h"
 
 // Recursively visit a html page. Running DFS with a maximum depth.

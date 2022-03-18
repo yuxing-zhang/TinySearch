@@ -1,12 +1,17 @@
-obj = html.o dict.o hash.o
+AR = /usr/bin/ar
+OBJ = html.o dict.o hash.o
+LIB = ../../lib/libtseutils.a
+INC = ../../include/
 
-ALL : $(obj)
+$(LIB) : $(OBJ)
+	mkdir -p ../../lib
+	$(AR) cvq $(LIB) $(OBJ)
 
-html.o : html.h
+html.o : $(INC)html.h
 
-dict.o : dict.h hash.h
+dict.o : $(INC)dict.h $(INC)hash.h
 
 hash.o :
 
 clean :
-	rm $(obj)
+	rm $(OBJ) $(LIB)
