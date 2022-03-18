@@ -16,6 +16,7 @@ Node *create_node(char *key, void *value, Node *next) {
     return node;
 }
 
+// Create a fresh hash table
 Node **create_dict() {
     Node **dict = malloc(sizeof(Node *) * MAX_SLOT);
     memset(dict, 0, sizeof(Node *) * MAX_SLOT);
@@ -33,6 +34,7 @@ int has_key(Node *dict[], const char *key) {
     return 0;
 }
 
+// Retrieve the value of a given key
 void *get_value(Node *dict[], const char *key) {
     int k = hash(key) % MAX_SLOT;
     Node *p;

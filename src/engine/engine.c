@@ -1,3 +1,8 @@
+/* The query engine.
+ * Core function is the `search' function which prints URLs for pages that
+ * contain all search terms. The results are sorted based on words count. The
+ * count for a webpage is the total count of all search terms in that page.
+ */
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -16,20 +21,24 @@ void and_add(Node **dict, Node **count) {
     for (int i = 0; i < MAX_SLOT; i++)
         if (dict[i])
             for (p = dict[i]; p;) {
+                // Add value together for intersected keys
                 if (has_key(count, p->key)) {
                     *(int *)p->value += *(int *)get_value(count, p->key);
                     p = p-> next;
                 }
+                // Remove keys not contained in `count'
                 else {
                     q = p;
                     p = p->next;
                     del_key(dict, q->key);
                 }
-            } } /* Carry a search again `index`.
+            }
+}
+
+/* Carry out a search against `index`.
  * nf - # of files in data/html
  * term - search terms
  * n - # of search terms
- * Return - # of pages containing all search terms
  *
  * The results are sorted decreasingly according to node value.
  */
@@ -40,7 +49,7 @@ void search(Node **index, int nf, char **term, int n) {
     // Time the search
     clock_t begin = clock(), end;
     // Build a fresh dict.
-    // dict = {x: 0 for 'x.html' in 'data/'}
+    // dict = {x: 0 for 'x.html' in 'data/html/'}
     for (int i = 0; i < nf ; i++) {
         c = malloc(sizeof(int));
         *c = 0;
@@ -98,6 +107,7 @@ int cmp(const void *m, const void *n) {
     return (mv < nv) - (nv < mv);
 }
 
+// Create a dictionary from a saved index
 Node **load_dict() {
     Node **dict = create_dict();
     FILE *f = fopen("data/index.dat", "r");

@@ -1,12 +1,17 @@
+/* General html parsing funtions.
+ * The following functions are provided:
+ * - Retrieving all valid URLs in a html page
+ * - Removing white spaces in a html page
+ * - Removing all tags, javascripts, CSS in a html page,
+ *   thus leaving only normal texts.
+ * - Loading a html page into memory.
+ */
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 #include "html.h"
 
 /* Get the next URL in a html file
-
-The main component of the html parser. It can handle normal absolute
-and relative URLs found in the <a href=""> tags.
 
 Args:
     html - html file to scan
@@ -124,7 +129,7 @@ void remove_white_space(char *html) {
     free(buffer);
 }
 
-// Remove all tags and java scripts
+// Remove all tags, CSS and java scripts
 void textualize(char *html) {
     // p is the new end and q is the scanning pointer
     char *p, *q, *t;

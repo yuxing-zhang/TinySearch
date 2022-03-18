@@ -1,3 +1,13 @@
+/* The indexer builds a reverse index for crawled webpages. The index will be
+ * saved as `/data/index.dat'.
+ * The index is a nested dictionary:
+ *     index = {word: {id: count | `id'.html has `word'}}
+ * The index.dat contains newline separated records. Each record has the
+ * following format:
+ *     word count id1 count1 id2 count2 ...,
+ * where `count' is the # of webpages containing `word', and `count'i is the #
+ * of occurrence of `word' in page `id'i.
+ */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -5,7 +15,7 @@
 #include "html.h"
 #include "indexer.h"
 
-// Count a single occurrence of a word in a webpage
+// Count a single occurrence of a word in a webpage. `dict' is updated.
 void count(Node *dict[], char *word, int id) {
     Node **counter;
     int *c = malloc(sizeof(int));
@@ -26,7 +36,7 @@ void count(Node *dict[], char *word, int id) {
     }
 }
 
-// Count the occurrence of every word in a webpage
+// Count the occurrence of every word in a webpage. `dict' is updated.
 // Return -1 when file cannot be opened
 // Return 0 upon success
 int count_page(Node *dict[], int id) {
@@ -74,6 +84,7 @@ void save_dict(Node *dict[]) {
     fclose(f);
 }
 
+// Create a dictionary from a saved index
 Node **load_dict() {
     Node **dict = create_dict();
     FILE *f = fopen("data/index.dat", "r");

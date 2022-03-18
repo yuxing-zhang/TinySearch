@@ -1,3 +1,11 @@
+/* The crawler downloads webpages in a depth first order.
+ * The key parameters are:
+ *     seed - the first webpage to download
+ *     MAX_DEPTH - max depth in search
+ *
+ * Downloaded webpages are saved in /data/html/ folder and named
+ * as `id.html'. The seed html page has an id of 0.
+ */
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
