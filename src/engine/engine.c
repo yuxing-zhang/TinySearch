@@ -111,7 +111,7 @@ int cmp(const void *m, const void *n) {
 Node **load_dict() {
     Node **dict = create_dict();
     FILE *f = fopen("data/index.dat", "r");
-    char buf[MAX_INDEX_LENGTH], *s, *t, *w, *id;
+    char buf[MAX_RECORD_LENGTH], *s, *t, *w, *id;
     memset(buf, 0, sizeof buf);
     int page_count, *count;
     Node **c;

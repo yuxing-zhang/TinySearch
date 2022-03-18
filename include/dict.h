@@ -1,3 +1,4 @@
+// Size of the array in a hash table
 #define MAX_SLOT 10000
 
 // Linked list node

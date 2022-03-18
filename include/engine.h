@@ -1,5 +1,8 @@
-#define MAX_SEARCH_LENGTH 100
+// Max length of a search
+#define MAX_SEARCH_LENGTH 1000
+// Max length of a search term
 #define MAX_TERM_LENGTH 20
+// Max number of search terms
 #define MAX_TERMS 100
 
 void and_add(Node **, Node **);

@@ -6,8 +6,13 @@
 #define MAX_URL_LENGTH 1000
 
 int get_next_url(char *, const char *, char *, int);
+
 void remove_white_space(char *);
+
 int normalize_url(char *);
+
 void lower(char *);
+
 void textualize(char *);
+
 char *load_html(const char *);

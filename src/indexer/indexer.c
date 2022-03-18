@@ -60,7 +60,7 @@ int count_page(Node *dict[], int id) {
 // Serialize an indexer dictionary
 void save_dict(Node *dict[]) {
     int count;
-    char s[MAX_INDEX_LENGTH];
+    char s[MAX_RECORD_LENGTH];
     FILE *f = fopen("data/index.dat", "w");
     Node **counter;
     for (int i = 0; i < MAX_SLOT; i++)
@@ -88,7 +88,7 @@ void save_dict(Node *dict[]) {
 Node **load_dict() {
     Node **dict = create_dict();
     FILE *f = fopen("data/index.dat", "r");
-    char buf[MAX_INDEX_LENGTH], *s, *t, *w, *id;
+    char buf[MAX_RECORD_LENGTH], *s, *t, *w, *id;
     memset(buf, 0, sizeof buf);
     int page_count, *count;
     Node **c;
