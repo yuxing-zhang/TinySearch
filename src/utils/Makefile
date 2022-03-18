@@ -1,3 +1,4 @@
+CFLAGS = -Wall -pedantic -std=c99 -I ../../include
 AR = /usr/bin/ar
 OBJ = html.o dict.o hash.o
 LIB = ../../lib/libtseutils.a
