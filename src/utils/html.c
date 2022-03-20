@@ -134,7 +134,6 @@ void textualize(char *html) {
     // p is the new end and q is the scanning pointer
     char *p, *q, *t;
     for (p = html, q = strchr(html, '\n') + 1; *q; q++) {
-        if (*q == '\r') putchar('f');
         if (*q == '<') {
             if (!strncmp(q, "<script", 7))
                 q = strstr(q, "</script>");
@@ -147,8 +146,7 @@ void textualize(char *html) {
             // if no near ';' then treat '&' as normal
             if((t = memchr(q, ';', 10)))
                 q = t;
-        }
-        else if (*q >= 'a' && *q <= 'z')
+        } else if (*q >= 'a' && *q <= 'z')
             *p++ = *q;
         // Change upper case letters into lower cases
         else if (*q >= 'A' && *q <= 'Z')
