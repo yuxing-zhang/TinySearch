@@ -6,7 +6,7 @@ INC = ../../include/
 
 $(LIB) : $(OBJ)
 	mkdir -p ../../lib
-	$(AR) cvq $(LIB) $(OBJ)
+	$(AR) cvr $(LIB) $(OBJ)
 
 html.o : $(INC)html.h
 
