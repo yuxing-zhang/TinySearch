@@ -10,7 +10,7 @@ make
 seed="https://web.cs.dartmouth.edu/"
 
 echo "Start crawling..."
-./bin/crawler "https://web.cs.dartmouth.edu/"
+./bin/crawler $seed
 echo "Crawling done!"
 
 echo "Building index"
