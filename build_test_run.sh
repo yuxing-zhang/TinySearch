@@ -6,8 +6,11 @@
 
 make
 
+# Seed URL
+seed="https://web.cs.dartmouth.edu/"
+
 echo "Start crawling..."
-./bin/crawler
+./bin/crawler "https://web.cs.dartmouth.edu/"
 echo "Crawling done!"
 
 echo "Building index"
